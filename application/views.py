@@ -71,7 +71,7 @@ def accept_user(request):
 def create_student(request):
     if not request.session.get('user_email') or not request.session.get('user_password'):
         messages.error(request, 'You need to be logged in to access this page.')
-        return render(request, 'application/create_student.html')
+        return render(request, 'application/register.html')
     
     if request.method == 'POST':
         student_data = request.POST

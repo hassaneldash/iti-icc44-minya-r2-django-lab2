@@ -1,5 +1,4 @@
-/* styles.css */
-
+/* CSS */
 .carousel {
     position: relative;
     width: 100%;
@@ -14,6 +13,11 @@
 
 .carousel-item {
     flex: 0 0 100%;
+    display: none;
+}
+
+.carousel-item.active {
+    display: block;
 }
 
 .carousel-item img {
