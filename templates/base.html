@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block 'title' %}
+    <title>Home</title>
+    {% endblock 'title' %}
+    {% block 'link' %}{% endblock 'link' %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body, ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #38506d;
+            padding: 10px 0;
+        }
+
+        ul.navbar {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        ul.navbar li {
+            float: left;
+        }
+
+        ul.navbar li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        ul.navbar li a:hover {
+            background-color: #111;
+        }
+
+        .search {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search input[type="text"] {
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            margin-right: 5px;
+            width: 200px;
+        }
+
+        .search button {
+            padding: 8px;
+            background-color: #a16bed;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .search button:hover {
+            background-color: #7626e8;
+        }
+
+        .fa-search {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+  <nav>
+    <ul class="navbar">
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'register' %}">Register</a></li>
+      <li><a href="{% url 'login' %}">Login</a></li>
+      <li><a href="{% url 'logout' %}">Logout</a></li>
+      <li><a href="{% url 'create_student' %}">Add Student</a></li>
+      <li><a href="{% url 'show_user' %}">Show Data</a></li>
+      <li><a href="{% url 'about' %}">About</a></li>
+      <li class="search">
+        <form action="#" method="get">
+          <input type="text" placeholder="Search..." name="search">
+          <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+      </li>
+    </ul>
+  </nav>
+  {% block 'body' %}{% endblock 'body' %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'title' %}
+<title>Home</title>
+{% endblock 'title' %}
+{% block 'link' %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock 'link' %}
+{% block 'body' %}
+<div class="carousel">
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'images/carousel1.jpg' %}" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'images/carousel2.jpg' %}" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'images/carousel3.jpg' %}" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control carousel-control-prev" type="button" data-bs-target=".carousel" data-bs-slide="prev">
+        &lt;
+    </button>
+    <button class="carousel-control carousel-control-next" type="button" data-bs-target=".carousel" data-bs-slide="next">
+        &gt;
+    </button>
+</div>
+{% endblock 'body' %}

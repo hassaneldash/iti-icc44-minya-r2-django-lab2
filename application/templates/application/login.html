@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'title' %}
+<title>Login</title>
+{% endblock 'title' %}
+{%block 'link'%}
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock 'link'%}
+{%block 'body'%}
+<div class="form-container">
+    <form method="POST" action="{% url 'accept_user' %}" class="login-form">
+        {% csrf_token %}
+        <div class="container">
+            <h1>Login</h1>
+            <hr> 
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Please, enter your email" name="email" id="email" required>
+            
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Please, enter your password" name="password" id="password" required>
+            <hr>  
+            <button type="submit" class="registerbtn">Login</button>
+        </div>
+    </form>
+</div>
+{% endblock 'body' %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block 'title' %}
+<title>Add Student</title>
+{% endblock 'title' %}
+{% block 'link' %}
+<link rel="stylesheet" href="{% static 'css/create_student.css' %}">
+{% endblock 'link' %}
+{% block 'body' %}
+<div class="container">
+    <h1>Add Student</h1>
+    <hr>
+    <form method="post" action="{% url 'create_student' %}">
+        {% csrf_token %}
+        <div class="form-container">
+            <label for="fname">Student name:</label><br>
+            <input type="text" id="fname" name="fname" required><br>
+            <label for="lname">Student Email :</label><br>
+            <input type="text" id="lname" name="email" required><br>
+            <label for="age">Student Age :</label><br>
+            <input type="text" id="age" name="age"><br>
+            <input type="submit" class="registerbtn" value="Submit">
+        </div>
+    </form>
+</div>
+{% endblock 'body' %}
