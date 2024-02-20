@@ -1,6 +1,9 @@
+from http.client import HTTPResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import User, Student
+from django.contrib.auth import authenticate, login as django_login, logout as django_logout
+from django.contrib.auth.models import User as django_user
 
 def index(request):
     return redirect('home')
@@ -11,6 +14,8 @@ def home(request):
     return render(request, 'application/home.html')
 
 def about(request):
+    if not request.session.get('user_email') or not request.session.get('user_password'):
+        return render(request, 'application/register.html')
     return render(request, 'application/About.html')
 
 def create_student(request):
@@ -24,39 +29,74 @@ def register(request):
 def login(request):
     return render(request, 'application/login.html')
 
-def create_user(request):
-        if request.method == 'POST':
-            fname = request.POST['fname']
-            lname = request.POST['lname']
-            uname = request.POST['uname']
-            email = request.POST['email']
-            password = request.POST['password']
-            user = User.objects.create(
-                fname=fname,
-                lname=lname,
-                uname=uname,
-                email=email,
-                password=password
-            )
-            return redirect('login') 
-        else:
-            return render(request, 'application/register.html')
-        
+# ______________ Lab No.03 ______________
+# def createusers(request):
+#         if request.method == 'POST':
+#             fname = request.POST['fname']
+#             lname = request.POST['lname']
+#             username = request.POST['username']
+#             email = request.POST['email']
+#             password = request.POST['password']
+#             # user = User.objects.create(
+#             user = django_user.objects.create_user(
+#                 first_name=fname,
+#                 last_name=lname,
+#                 username=username,
+#                 email=email,
+#                 password=password
+#             )
+#             user.save()
+#         #     return redirect('login') 
+#         # else:
+#         #     return render(request, 'application/register.html')
+#             user = authenticate(request, username=username, password=password)
+#             if user is not None:
+#                 django_login(request, user)
+#                 return redirect('home')  
+#             else:
+#                 return HTTPResponse("Request failed")
+#         else:
+#             return render(request, 'application/register.html')
 
-# def create_user(request):
+
+# ______________ Lab No.02 (Working✔️) ______________
+def createusers(request):
+    if request.method == 'POST':
+        user_data = request.POST
+        User.objects.create(
+            fname = user_data['fname'],
+            lname = user_data['lname'],
+            username = user_data['username'],
+            email = user_data['email'],
+            password = user_data['password']
+        )
+        return redirect('login')
+    else:
+        return render(request, 'application/register.html')
+
+
+
+# # ______________ Lab No.03 (Working✔️) ______________
+# def createusers(request):
 #     if request.method == 'POST':
-#         user_data = request.POST
-#         User.objects.create(
-#             fname = user_data['fname'],
-#             lname = user_data['lname'],
-#             uname = user_data['uname'],
-#             email = user_data['email'],
-#             password = user_data['password']
+#         username = request.POST['username']
+#         email = request.POST['email']
+#         password = request.POST['password']
+#         if User.objects.filter(email=email).exists():
+#             messages.error(request, 'Email already exists.')
+#             return render(request, 'application/register.html')
+        
+#         django_user.objects.create_user(
+#             username = username,
+#             email = email,
+#             password = password
 #         )
 #         return redirect('login')
 #     else:
 #         return render(request, 'application/register.html')
 
+
+# ______________ Lab No.02 (Working✔️) ______________
 def accept_user(request):
     if request.method == 'POST':
         user_data = request.POST
@@ -67,6 +107,24 @@ def accept_user(request):
             return redirect('home')
     return render(request, 'application/register.html')
 
+
+# # ______________ Lab No.03 (Working✔️) ______________
+# def accept_user(request):
+#     if request.method == 'POST':
+#         email = request.POST['email']
+#         password = request.POST['password']
+#         myuser = User.objects.filter(email=email).first()
+#         if myuser:
+#             auth = authenticate(request, username=myuser[0].username, password=password)
+#             print(auth)
+#             if auth is not None:
+#                 django_login(request, auth)
+#                 return redirect('home')
+#         else:
+#             return render(request, 'application/login.html')
+#     else:
+#         return render(request, 'application/login.html')
+#     return render(request, 'application/register.html')
 
 def create_student(request):
     if not request.session.get('user_email') or not request.session.get('user_password'):
@@ -106,6 +164,13 @@ def edit_student(request, student_id):
         return redirect('show_user')
     return render(request, 'application/edit_student.html', {'student': student})
 
+## ______________ Lab No.02 (Working✔️) ______________
+# def logout(request):
+#     request.session.clear()
+#     return render(request, 'application/register.html')
+
+
+# ______________ Lab No.03 (Working✔️) ______________
 def logout(request):
-    request.session.clear()
+    django_logout(request)
     return render(request, 'application/register.html')

@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock 'link'%}
 {%block 'body'%}
-<form method="POST" action="{% url 'create_user' %}" class="form-container">
+<form method="POST" action="{% url 'createusers' %}" class="form-container">
     {% csrf_token %}
     <div class="container">
         <h1>Register</h1>
@@ -18,8 +18,8 @@
         <label for="lname"><b>Last Name</b></label>
         <input type="text" placeholder="Please, enter your last name" name="lname" id="lname" required>
         
-        <label for="uname"><b>User Name</b></label>
-        <input type="text" placeholder="Please, enter your username" name="uname" id="uname" required>
+        <label for="username"><b>User Name</b></label>
+        <input type="text" placeholder="Please, enter your username" name="username" id="username" required>
         
         <label for="email"><b>Email</b></label>
         <input type="email" placeholder="Please, enter your email" name="email" id="email" required>
