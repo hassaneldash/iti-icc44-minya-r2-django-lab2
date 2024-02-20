@@ -29,34 +29,31 @@ def register(request):
 def login(request):
     return render(request, 'application/login.html')
 
-# ______________ Lab No.03 ______________
+# # ______________ Lab No.03 (Working✔️) ______________
 # def createusers(request):
-#         if request.method == 'POST':
-#             fname = request.POST['fname']
-#             lname = request.POST['lname']
-#             username = request.POST['username']
-#             email = request.POST['email']
-#             password = request.POST['password']
-#             # user = User.objects.create(
-#             user = django_user.objects.create_user(
-#                 first_name=fname,
-#                 last_name=lname,
-#                 username=username,
-#                 email=email,
-#                 password=password
-#             )
-#             user.save()
-#         #     return redirect('login') 
-#         # else:
-#         #     return render(request, 'application/register.html')
-#             user = authenticate(request, username=username, password=password)
-#             if user is not None:
-#                 django_login(request, user)
-#                 return redirect('home')  
-#             else:
-#                 return HTTPResponse("Request failed")
+#     if request.method == 'POST':
+#         first_name = request.POST['fname']
+#         last_name = request.POST['lname']
+#         username = request.POST['username']
+#         email = request.POST['email']
+#         password = request.POST['password']
+
+#         user = User.objects.create_user(
+#             first_name=first_name,
+#             last_name=last_name,
+#             username=username,
+#             email=email,
+#             password=password
+#         )
+#         user.save()
+#         user = authenticate(request, username=username, password=password)
+#         if user:
+#             login(request, user)
+#             return redirect('home')  
 #         else:
-#             return render(request, 'application/register.html')
+#             return redirect('register')
+#     else:
+#         return render(request, 'application/register.html')
 
 
 # ______________ Lab No.02 (Working✔️) ______________
@@ -76,7 +73,7 @@ def createusers(request):
 
 
 
-# # ______________ Lab No.03 (Working✔️) ______________
+# # ______________ Lab No.03 ______________
 # def createusers(request):
 #     if request.method == 'POST':
 #         username = request.POST['username']
